@@ -137,7 +137,7 @@ cluster_walktrap(giant, steps=10)
 
 Other methods are:
 
-- The __fast and greedy__ method tries to directly optimize this modularity score.
+- The __fast and greedy__ method tries to directly optimize this modularity score. It takes advante of parallel processing, which essential to optimise network procressing.
 - The __infomap__ method attempts to map the flow of information in a network, and the different clusters in which information may get remain for longer periods. Similar to walktrap, but not necessarily maximizing modularity, but rather the so-called "map equation".
 - The __edge-betweenness__ method iteratively removes edges with high betweenness, with the idea that they are likely to connect different parts of the network. Here betweenness (gatekeeping potential) applies to edges, but the intuition is the same.
 - The __label propagation__ method labels each node with unique labels, and then updates these labels by choosing the label assigned to the majority of their neighbors, and repeat this iteratively until each node has the most common labels among its neighbors.

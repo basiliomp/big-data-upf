@@ -58,12 +58,13 @@ Finally, we'll try to visualize part of the network as well: only the Senators. 
 
 ```{r, eval=FALSE}
 sen <- induced_subgraph(g, V(g)$chamber=="sen")
+sen
 
 set.seed(123)
 fr <- layout_with_fr(sen, niter=1000)
 V(sen)$color <- ifelse(V(sen)$party=="Republican", "red", "blue") # clue
 V(sen)$label <- NA
-V(sen)$size <- authority_score(sen)$vector * 5
+V(sen)$size <- authority_score(sen)$vector * 5 #CRASH!
 
 pdf("congress-network.pdf")
 par(mar=c(0,0,0,0))

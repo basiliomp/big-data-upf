@@ -24,7 +24,7 @@ Now we're ready to scrape the website:
 ```{r}
 library(rvest, warn.conflicts=FALSE)
 bribes <- read_html(url) # reading the HTML code
-amounts <- html_nodes(bribes, ".paid-amount span") # identify the CSS selector
+amounts <- html_nodes(bribes, ".paid-amount span") # identify the CSS selector. The last argument is what we got from the "Selector gadget" Chrome extension.
 amounts # content of CSS selector
 html_text(amounts)
 ```
@@ -39,7 +39,7 @@ amounts <- html_text(amounts)
 
 Let's do another one: transactions during which the bribe ocurred
 ```{r}
-transaction <- html_nodes(bribes, ".transaction a")
+transaction <- html_nodes(bribes, ".transaction a") #The last argument is what we got from the "Selector gadget" Chrome extension.
 (transaction <- html_text(transaction))
 ```
 
@@ -95,7 +95,7 @@ for (i in 2:length(pages)){
 	url <- paste(base_url, pages[i], sep="")
 	# scrape website
 	bribes[[i]] <- scrape_bribe(url)
-	# wait a couple of seconds between URL calls
+	# wait a couple of seconds between URL calls not to flood the server.
 	Sys.sleep(2)
 }
 ```
@@ -127,7 +127,3 @@ And what was the average payment for each department?
 agg <- aggregate(bribes$amount, by=list(dept=bribes$dept), FUN=mean)
 agg[order(agg$x, decreasing = TRUE),] # ordering from highest to lowest
 ```
-
-
-
-

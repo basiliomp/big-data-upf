@@ -30,7 +30,7 @@ To extract all the tables in the html code automatically, we use `html_table()`.
 
 ```{r}
 tab <- html_table(html)
-str(tab)
+str(tab) # structure of the object table
 pop <- tab[[1]]
 ```
 

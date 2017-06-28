@@ -57,7 +57,7 @@ g[1,] # first row of adjacency matrix
 How can we visualize this network? The `plot()` function works out of the box, but the default options are often not ideal:
 
 ```{r}
-par(mar=c(0,0,0,0))
+par(mar=c(0,0,0,0)) #Here we are removing the margins of the following plot
 plot(g)
 ```
 
@@ -83,6 +83,7 @@ par(mar=c(0,0,0,0)); plot(g)
 V(g)$size <- log(strength(g)) * 4 + 3
 par(mar=c(0,0,0,0)); plot(g)
 
+# Representation of edges greater than 10
 V(g)$label <- ifelse( strength(g)>=10, V(g)$name, NA )
 par(mar=c(0,0,0,0)); plot(g)
 

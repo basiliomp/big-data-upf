@@ -9,7 +9,7 @@ output: html_document
 
 #### Collecting data from Twitter's REST API
 
-It is possible to download recent tweets, but only up those less than 7 days old, and in some cases not all of them. We will use the `netdemR` package for this (and the other functions that scrape Twitter's REST API).
+It is possible to download recent tweets, but only up those less than 7 days old, and in some cases not all of them. We will use the `netdemR` package for this (and the other functions that scrape Twitter's REST API). Be aware that `searchTweets` from  `netdemR` uses a outh_folder argument instead of a single oauth file because it can go through several authentication tokens in a row instead of getting stopped once a singular token stops working.
 
 ```{r}
 library(netdemR)

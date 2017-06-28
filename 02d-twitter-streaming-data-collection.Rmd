@@ -23,8 +23,8 @@ library(ROAuth)
 requestURL <- "https://api.twitter.com/oauth/request_token"
 accessURL <- "https://api.twitter.com/oauth/access_token"
 authURL <- "https://api.twitter.com/oauth/authorize"
-consumerKey <- "YOUR_CONSUMER_KEY"
-consumerSecret <- "YOUR_CONSUMER_SECRET"
+consumerKey <- "MoL5dKxIQpMtGXSqLJtizvYPw" #YOUR CONSUMER KEY HERE
+consumerSecret <- "9Tl8w0hkrW2DEo7JYUeLeh1u0992t1L6kLLNGnZWSmZehnqX4z" #YOUR_CONSUMER_SECRET
 
 my_oauth <- OAuthFactory$new(consumerKey=consumerKey,
   consumerSecret=consumerSecret, requestURL=requestURL,
@@ -47,6 +47,12 @@ save(my_oauth, file="credentials/twitter-token.Rdata")
 
 Collecting tweets filtering by keyword:
 
+Note the options:
+- `file.name` indicates the file in your disk where the tweets will be downloaded  
+- `track` is the keyword(s) mentioned in the tweets we want to capture.
+- `timeout` is the number of seconds that the connection will remain open. Set it to 0 for having it running unfinitely.
+- `oauth` is the OAuth token we are using
+
 ```{r}
 library(streamR)
 load("credentials/twitter-token.Rdata")
@@ -54,13 +60,8 @@ filterStream(file.name="trump-tweets.json", track="trump",
     timeout=20, oauth=my_oauth)
 ```
 
-Note the options:
-- `file.name` indicates the file in your disk where the tweets will be downloaded  
-- `track` is the keyword(s) mentioned in the tweets we want to capture.
-- `timeout` is the number of seconds that the connection will remain open  
-- `oauth` is the OAuth token we are using
-
-Once it has finished, we can open it in R as a data frame with the `parseTweets` function
+Once it has finished, we can open it in R as a data frame with the `parseTweets` function.
+Check the original json file to understand the difference between the number of rows in the parsed object and the output comment from the `filterStream` function used before (which says "up to").
 ```{r}
 tweets <- parseTweets("trump-tweets.json")
 str(tweets)

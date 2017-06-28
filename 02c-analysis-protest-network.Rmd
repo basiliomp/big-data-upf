@@ -26,25 +26,34 @@ Now let's try to answer some basic questions:
 Who were the users that retweeted the most? And the users that were most retweeted?
 
 ```{r}
+# Top 5 users most retweeted
+sort(degree(graph = g, mode = "in"), decreasing = T)[1:5]
 
+# Top 5 users that retweeted the most
+sort(degree(graph = g, mode = "out"), decreasing = T)[1:5]
 ```
 
 Who are the users with the highest levels of centrality?
 
 ```{r}
+sort(eigen_centrality(g)$vector)
 
+tail(sort(closeness(g, normalized=TRUE)))
+tail(sort(betweenness(g)))
 ```
 
 How many components are there in this network? Do you think it makes sense to keep the giant component?
 
 ```{r}
+components(g) # *** I am getting different output from this function compared to the solutions when run in the server? Check it!! ***
 
+g <- decompose(g)[[1]]
 ```
 
 Now run a community detection algorithm. Note that this may take a while! How many communities do you find? You can then run `head(table(membership(comm)))` to see how many users are in the first 6 communities. What does it tell you?
 
 ```{r}
-
+comm <- cluster_infomap(g)
 ```
 
 
